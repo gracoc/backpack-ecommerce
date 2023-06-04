@@ -2,6 +2,7 @@ package com.comteco.ecommerce.service;
 
 import com.comteco.ecommerce.dto.PageDto;
 import com.comteco.ecommerce.dto.ProductDto;
+import com.comteco.ecommerce.entity.Category;
 import com.comteco.ecommerce.entity.Product;
 import java.util.UUID;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,8 @@ public interface ProductService {
   Product getById(UUID id);
 
   Product update(UUID id, ProductDto dto);
+
+  PageDto<Product> getProductsByCategoryId(UUID categoryId, Pageable pageable);
 
   Page<Product> getProducts(Pageable pageable);
 

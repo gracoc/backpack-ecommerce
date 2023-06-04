@@ -63,7 +63,18 @@ public class ProductController {
     return ResponseEntity.status(HttpStatus.OK).body(productUpdated);
   }
 
-  @Hidden
+
+  @Operation(
+      summary = "Get list product by category ID"
+  )
+  @GetMapping("/category/{categoryId}")
+  public ResponseEntity<PageDto<Product>> getProductsByCatagoryId(@PathVariable UUID categoryId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    Pageable pageable = PageRequest.of(page, size);
+    PageDto<Product> productPage = productService.getProductsByCategoryId(categoryId, pageable);
+    return ResponseEntity.status(HttpStatus.OK).body(productPage);
+  }
+
+    @Hidden
   @GetMapping("/pageable")
   public ResponseEntity<Page<Product>> getProducts(@RequestParam int page, @RequestParam int size) {
     Pageable pageable = PageRequest.of(page, size);
