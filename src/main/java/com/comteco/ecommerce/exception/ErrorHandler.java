@@ -15,6 +15,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ErrorHandler {
 
+  @ExceptionHandler(ValueAlreadyTaken.class)
+  public ResponseEntity<ErrorResponse> handleValueAlreadyTaken(Exception ex) {
+    HttpStatus status = HttpStatus.CONFLICT;
+    ErrorResponse error = ErrorResponse.builder()
+        .code(status.value())
+        .error(status.name())
+        .message(ex.getMessage())
+        .build();
+    return ResponseEntity.status(status).body(error);
+  }
+
   @ExceptionHandler(EntityNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleEntityNotFoundException(Exception ex) {
     HttpStatus status = HttpStatus.NOT_FOUND;

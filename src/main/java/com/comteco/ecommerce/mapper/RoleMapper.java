@@ -10,7 +10,7 @@ public class RoleMapper {
   public Role fromDto(RoleDto dto) {
     Role rol = new Role();
     rol.setDescription(dto.getDescription());
-    rol.setName(dto.getName());
+    rol.setName(dto.getName().toUpperCase());
     return rol;
   }
 }

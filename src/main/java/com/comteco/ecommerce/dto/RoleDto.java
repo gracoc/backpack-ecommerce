@@ -1,6 +1,6 @@
 package com.comteco.ecommerce.dto;
 
-import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +10,9 @@ import lombok.Setter;
 @Setter
 public class RoleDto {
 
+  @NotBlank(message = "{role.name.not-blank}")
   private String description;
+
+  @NotBlank(message = "{Role.description.not-blank}")
   private String name;
 }

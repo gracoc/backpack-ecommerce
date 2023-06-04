@@ -4,6 +4,7 @@ import com.comteco.ecommerce.dto.RoleDto;
 import com.comteco.ecommerce.entity.Role;
 import com.comteco.ecommerce.service.RoleService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class RoleController {
   private RoleService roleService;
 
   @PostMapping
-  public ResponseEntity<Role> create(@RequestBody RoleDto dto){
+  public ResponseEntity<Role> create(@Valid @RequestBody RoleDto dto){
     Role roleSaved = roleService.create(dto);
     return ResponseEntity.status(HttpStatus.CREATED).body(roleSaved);
   }

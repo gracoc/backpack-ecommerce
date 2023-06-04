@@ -3,6 +3,7 @@ package com.comteco.ecommerce.service;
 import com.comteco.ecommerce.dto.RoleDto;
 import com.comteco.ecommerce.entity.Role;
 import com.comteco.ecommerce.exception.EntityNotFoundException;
+import com.comteco.ecommerce.exception.ValueAlreadyTaken;
 import com.comteco.ecommerce.mapper.RoleMapper;
 import com.comteco.ecommerce.repository.RoleRepository;
 import java.util.List;
@@ -17,8 +18,12 @@ public class RoleServiceImpl implements RoleService {
   private RoleMapper roleMapper;
   @Override
   public Role create(RoleDto dto) {
+    boolean existRole  = roleRepository.findByName(dto.getName()).isPresent();
+    if(existRole){
+      throw  new ValueAlreadyTaken("Role Name", dto.getName());
+    }
     Role role = roleMapper.fromDto(dto);
-    return role;
+    return roleRepository.save(role);
   }
 
   @Override
