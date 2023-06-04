@@ -50,6 +50,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public PageDto<Product> getProductsByCategoryId(UUID categoryId, Pageable pageable) {
+
     Page<Product> page =  productRepository.findByCategoryId(categoryId, pageable);
     return productMapper.fromEntity(page);
   }

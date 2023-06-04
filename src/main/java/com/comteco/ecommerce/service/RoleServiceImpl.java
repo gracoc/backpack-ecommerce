@@ -16,11 +16,12 @@ public class RoleServiceImpl implements RoleService {
 
   private RoleRepository roleRepository;
   private RoleMapper roleMapper;
+
   @Override
   public Role create(RoleDto dto) {
     boolean existRole  = roleRepository.findByName(dto.getName()).isPresent();
     if(existRole){
-      throw  new ValueAlreadyTaken("Role Name", dto.getName());
+      throw  new ValueAlreadyTaken("Role with name", dto.getName());
     }
     Role role = roleMapper.fromDto(dto);
     return roleRepository.save(role);

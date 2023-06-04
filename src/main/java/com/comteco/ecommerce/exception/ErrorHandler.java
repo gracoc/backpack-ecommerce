@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ErrorHandler {
 
+  private static final String ERROR_MSG = "Value already exists";
   @ExceptionHandler(ValueAlreadyTaken.class)
   public ResponseEntity<ErrorResponse> handleValueAlreadyTaken(Exception ex) {
     HttpStatus status = HttpStatus.CONFLICT;
     ErrorResponse error = ErrorResponse.builder()
         .code(status.value())
-        .error(status.name())
+        .error(ERROR_MSG)
         .message(ex.getMessage())
         .build();
     return ResponseEntity.status(status).body(error);
