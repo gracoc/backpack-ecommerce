@@ -38,8 +38,6 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public Product update(UUID id, ProductDto dto) {
-
-    System.out.println(("pathvariable" + id));
     Product productFound = productRepository.findById(id)
         .orElseThrow(() -> new EntityNotFoundException("Product", id));
 
